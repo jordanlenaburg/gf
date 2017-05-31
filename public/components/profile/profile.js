@@ -1,4 +1,4 @@
-var app = angular.module("TodoApp");
+var app = angular.module("GamesApp");
 
 app.controller("ProfileController", ["$scope", "UserService", function ($scope, UserService) {
     $scope.userService = UserService;

@@ -22,7 +22,8 @@ app.use("/api", expressJwt({secret: config.secret}));
 app.use("/auth/change-password", expressJwt({secret: config.secret}));
 app.use("/auth", require("./routes/authRoutes"));
 
-app.use("/api/todos", require("./routes/todoRoutes"));
+app.use("/api/games", require("./routes/gamesRoutes"));//secure route
+app.use("/allGames", require("./routes/allGamesRoutes"))//unsecure route
 
 app.listen(port, function() {
     console.log("Mongoose is loose --> " + port);

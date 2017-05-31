@@ -1,4 +1,4 @@
-var app = angular.module("TodoApp.Auth");
+var app = angular.module("GamesApp.Auth");
 
 app.controller("PasswordResetController", ["$scope", "$location", "$routeParams", "UserService", function ($scope, $location, $routeParams, UserService) {
     $scope.resetForgottenPassword = function(password, passwordRepeat) {

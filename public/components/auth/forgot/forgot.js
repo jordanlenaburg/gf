@@ -1,4 +1,4 @@
-angular.module("TodoApp.Auth")
+angular.module("GamesApp.Auth")
 
 .controller("ForgotPasswordController", ["$scope", "UserService", function ($scope, UserService) {
     $scope.forgotPassword = function(email) {

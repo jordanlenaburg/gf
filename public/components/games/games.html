@@ -9,20 +9,20 @@
             <label for="description">Description</label>
             <textarea class="form-control" name="description" id="description" ng-model="todo.description"></textarea>
         </div>
-        <button ng-click="saveTodo(todo)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
+        <button ng-click="saveGames(games)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
     </form>
 
     <section class="col-md-4">
-        <div class="panel panel-default" ng-repeat="todo in todos">
+        <div class="panel panel-default" ng-repeat="game in games">
             <div class="panel-heading">
-                <h4 ng-class="{ 'completed text-muted' : todo.completed }">{{ todo.title }}</h4>
+                <h4 ng-class="{ 'completed text-muted' : game.completed }">{{ game.title }}</h4>
             </div>
             <div class="panel-body">
                 <div class="pull-left">
-                    <p ng-class="{ 'completed text-muted' : todo.completed }">{{ todo.description }}</p>
+                    <p ng-class="{ 'completed text-muted' : game.completed }">{{ game.description }}</p>
                 </div>
                 <div class="checkbox pull-right">
-                    <input type="checkbox" ng-model="todo.completed">
+                    <input type="checkbox" ng-model="game.completed">
                 </div>
             </div>
         </div>

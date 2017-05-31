@@ -1,4 +1,4 @@
-var app = angular.module("TodoApp.Auth", ["ngStorage"]);
+var app = angular.module("GamesApp.Auth", ["ngStorage"]);
 
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider

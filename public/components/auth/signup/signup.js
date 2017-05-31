@@ -1,4 +1,4 @@
-var app = angular.module("TodoApp.Auth");
+var app = angular.module("GamesApp.Auth");
 
 app.controller("SignupController", ["$scope", "$location", "UserService", function ($scope, $location, UserService) {
     $scope.passwordMessage = "";
