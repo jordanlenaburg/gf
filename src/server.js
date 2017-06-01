@@ -18,12 +18,15 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use("/api", expressJwt({secret: config.secret}));
+app.use("/api", expressJwt({secret: config.secret}));//added security prefix
 app.use("/auth/change-password", expressJwt({secret: config.secret}));
 app.use("/auth", require("./routes/authRoutes"));
 
-app.use("/api/games", require("./routes/gamesRoutes"));//secure route
-app.use("/allGames", require("./routes/allGamesRoutes"))//unsecure route
+app.use("/games", require("./routes/gameRoutes"));
+
+app.use("/api/sessionMaster", require("./routes/sessionRoutes"));
+app.use("/allSessions", require("./routes/allSessionsRoutes"));
+
 
 app.listen(port, function() {
     console.log("Mongoose is loose --> " + port);
