@@ -1,8 +1,7 @@
 <div class="row">
     <section class="col-md-6">
 
-        <div id="stateStores" class="panel panel-default" ng-repeat="store in stores">
-            Stores
+        <div id="stateStores" class="panel panel-default" ng-repeat="store in stores" ng-model="choose">
             <div class="panel-heading">
                 <h4>{{ store.name }}</h4>
             </div>

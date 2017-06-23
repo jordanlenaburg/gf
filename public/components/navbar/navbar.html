@@ -13,8 +13,10 @@
         <!--collect links and forms-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#/stores">Gaming Stores<span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="#/games">Games List<span class="sr-only">(current)</span></a></li>
+                <li ng-show="userService.isAuthenticated()" class="active"><a href="#/showStores">Gaming Stores<span class="sr-only">(current)</span></a></li>
+                <li ng-hide="userService.isAuthenticated()" class="active"><a href="#/">Gaming Stores<span class="sr-only">(current)</span></a></li>
+                <li><a href="#/games">Games List</a></li>
+                <li ng-show="userService.isAuthenticated()"><a href="#createSession">Create Session</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

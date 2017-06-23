@@ -104,6 +104,7 @@ app.service("TokenService", ["$localStorage", function ($localStorage) {
 
     this.removeToken = function () {
         delete $localStorage.token;
+        delete $localStorage.state;
     };
 }]);
 

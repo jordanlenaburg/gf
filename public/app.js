@@ -1,4 +1,4 @@
-var app = angular.module("GamesApp", ["ngRoute", "GamesApp.Auth"]);
+var app = angular.module("GamesApp", ["ngRoute", "GamesApp.Auth", "ngStorage"]);
 
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
@@ -20,11 +20,11 @@ app.config(["$routeProvider", function ($routeProvider) {
         })
         .when("/createSession", {
             templateUrl: "components/sessions/sessions.html",
-            controller: "createSessionController"
+            controller: "CreateSessionController"
         })
         .when("/showStores", {
-        templateUrl: "components/stores/stores.html",
-        controller: "StoresController"
-    })
+            templateUrl: "components/stores/stores.html",
+            controller: "StoresController"
+        })
 
 }]);
