@@ -23,6 +23,7 @@ app.use("/auth/change-password", expressJwt({secret: config.secret}));
 app.use("/auth", require("./routes/authRoutes"));
 
 app.use("/games", require("./routes/gameRoutes"));
+app.use("/stores/", require("./routes/storeRoutes"));
 
 app.use("/api/sessionMaster", require("./routes/sessionRoutes"));
 app.use("/allSessions", require("./routes/allSessionsRoutes"));

@@ -6,15 +6,14 @@ var userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
-        lowercase: true
+        unique: true
     },
     email: {
         type: String,
         required: true,
         unique: true,
         lowercase: true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$/, 'Please fill a valid email address']
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$/, 'Make it real or else forget about it...']
     },
     password: {
         type: String,
@@ -24,6 +23,15 @@ var userSchema = new Schema({
         type: Boolean,
         default: false
     },
+    dateJoined: {
+        type: Date,
+        default: Date.now
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    _sessionsJoined: [],
     resetPasswordToken: String,
     resetPasswordExpires: Date
 });

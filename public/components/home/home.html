@@ -1,4 +1,23 @@
-<div class="jumbotron">
-    <h1>Welcome to the landing page!</h1>
-    <a href="#/games" class="btn btn-primary btn-lg">See your todos</a>
+<span>
+    Choose the state you want to play in:
+</span>
+
+<select ng-model="selectedState" ng-options="state for state in states" ng-change="getStores(selectedState)">
+</select>
+<div>{{selectedState}}</div>
+<div id="stateStores" class="panel panel-default" ng-repeat="store in stores">
+    <div class="panel-heading">
+        <h4>{{ store.name }}</h4>
+    </div>
+    <div class="panel-body">
+        <div class="pull-left">
+           <p>{{ store.phone }} | {{store.streetAddy}} {{store.city}}</p>
+            <p> {{store.hours}}</p>
+            <p>{{ store.description }}</p>
+        </div>
+    </div>
 </div>
+<br>
+or<span ng-hide="userService.isAuthenticated()"><a href="#/login"> <button>Login</button></a></span>
+<span>to choose a game from the Game Stores in your state!</span>
+

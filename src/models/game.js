@@ -6,6 +6,7 @@ var gameSchema = new Schema({
         type: String,
         required: true
     },
+    maxPlayers: Number,
     description: String,
     referenceWebsite: String
 });

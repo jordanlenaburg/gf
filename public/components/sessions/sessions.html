@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-4 well" name="sessionForm" novalidate>
+
+    </div>
+
+    <section class="col-md-4">
+        <div class="panel panel-default" ng-repeat="session in sessions">
+            <div class="panel-heading">
+                <h4 ng-class="{ 'completed text-muted' : session.completed }">{{ session.title }}</h4>
+            </div>
+            <div class="panel-body">
+                <div class="pull-left">
+                    <p ng-class="{ 'completed text-muted' : session.completed }">{{ session.description }}</p>
+                </div>
+                <div class="checkbox pull-right">
+                    <input type="checkbox" ng-model="session.completed">
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

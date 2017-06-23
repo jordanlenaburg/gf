@@ -12,7 +12,7 @@ app.config(["$routeProvider", function ($routeProvider) {
         })
         .when("/logout", {
             controller: "LogoutController",
-            template: ""
+            template: "You have unplugged from the Matrix..."
         })
         .when("/forgot", {
             templateUrl: "components/auth/forgot/forgot.html",
@@ -21,6 +21,18 @@ app.config(["$routeProvider", function ($routeProvider) {
         .when("/reset/:resetToken", {
             templateUrl: "components/auth/reset/reset.html",
             controller: "PasswordResetController"
+        })
+        .when("/showGames", {
+            templateUrl: "components/games/games.html",
+            controller: "GamesController"
+        })
+        .when("/showSessions", {
+            templateUrl: "/components/sessions/sessions.html",
+            controller: "FindSessionsController"
+        })
+        .when("/profile", {
+            templateUrl: "/components/profile/profile.html",
+            controller: "ProfileController"
         })
 }]);
 
@@ -35,7 +47,7 @@ app.service("UserService", ["$http", "$location", "TokenService", function ($htt
 
     this.login = function (user) {
         return $http.post("/auth/login", user).then(function (response) {
-            TokenService.setToken(response.data.token);
+            TokenService.setToken(response.data.token, response.data.state);
             self.currentUser = response.data.user;
             return response;
         });
@@ -85,8 +97,9 @@ app.service("TokenService", ["$localStorage", function ($localStorage) {
         return $localStorage.token;
     };
 
-    this.setToken = function (token) {
+    this.setToken = function (token, state) {
         $localStorage.token = token;
+        $localStorage.state = state;
     };
 
     this.removeToken = function () {

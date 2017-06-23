@@ -1,28 +1,14 @@
 <div class="row">
-    <form class="col-md-4 well" name="todoForm" novalidate>
-        <h1>Welcome, {{ userService.currentUser.name }}</h1>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" ng-model="todo.title">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" name="description" id="description" ng-model="todo.description"></textarea>
-        </div>
-        <button ng-click="saveGames(games)" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
-    </form>
-
     <section class="col-md-4">
+       <div>Game List</div>
+       <br>
         <div class="panel panel-default" ng-repeat="game in games">
             <div class="panel-heading">
-                <h4 ng-class="{ 'completed text-muted' : game.completed }">{{ game.title }}</h4>
+                <h4>{{ game.name }}</h4>
             </div>
             <div class="panel-body">
                 <div class="pull-left">
-                    <p ng-class="{ 'completed text-muted' : game.completed }">{{ game.description }}</p>
-                </div>
-                <div class="checkbox pull-right">
-                    <input type="checkbox" ng-model="game.completed">
+                    <p>{{ game.description }}</p>
                 </div>
             </div>
         </div>
