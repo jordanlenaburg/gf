@@ -6,39 +6,48 @@ var config = require("../config");
 var bcrypt = require("bcrypt");
 var async = require("async");
 var crypto = require("crypto");
+var Store = require("../models/store");
 
 authRouter.post("/login", function (req, res) {
     User.findOne({
-        username: req.body.username
-    }, function (err, user) {
-        if (err) res.status(500).send(err);
-        if (!user) {
-            res.status(401).send({
-                success: false,
-                message: "User with the provided username was not found"
-            });
-        } else {
-            user.checkPassword(req.body.password, function (err, match) {
-                if (err) {
-                    res.status(500).send(err);
-                } else if (!match) {
-                    res.status(401).send({
-                        success: false,
-                        message: "Incorrect password"
-                    });
-                } else {
-                    var token = jwt.sign(user.toObject(), config.secret);
-                    res.send({
-                        success: true,
-                        token: token,
-                        user: user.withoutPassword(),
-                        message: "Here's your token!"
-                    });
+            username: req.body.username
+        }, function (err, user) {
+            if (err) res.status(500).send(err);
+            if (!user) {
+                res.status(401).send({
+                    success: false,
+                    message: "User with the provided username was not found"
+                });
+            } else {
+                if (user.mystore) {
+                    Store.findOne({
+                        _id: user.myStore
+                    }, function (err, store) {
+                        if (err) res.status(500).send(err);
+                    })
+                    user.myStore = store.name;
                 }
-            });
-        }
-    });
-});
+                user.checkPassword(req.body.password, function (err, match) {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else if (!match) {
+                        res.status(401).send({
+                            success: false,
+                            message: "Incorrect password"
+                        });
+                    } else {
+                        var token = jwt.sign(user.toObject(), config.secret);
+                        res.send({
+                            success: true,
+                            token: token,
+                            user: user.withoutPassword(),
+                            message: "Welcome to the Matrix!"
+                        });
+                    }
+                })
+            }
+        }) //store.findOne
+})
 
 authRouter.post("/signup", function (req, res) {
     User.findOne({
@@ -51,16 +60,11 @@ authRouter.post("/signup", function (req, res) {
             message: "Must be a glitch in the Matrix...you already exist!  Pick another name."
         });
         else {
-            console.log('else --')
-            console.log(req.body)
             var newUser = new User(req.body);
             newUser.save(function (err, user) {
-                console.log('save ');
                 if (err) {
-                    console.log(err);
                     res.status(500).send(err);
                 } else {
-                    console.log('route --> /signup --> res.send: success! ')
                     res.send({
                         success: true,
                         user: user,
@@ -74,7 +78,6 @@ authRouter.post("/signup", function (req, res) {
 
 
 authRouter.post("/change-password", function (req, res) {
-    console.log(req.user);
     User.findById(req.user._id, function (err, user) {
 
         if (err) {

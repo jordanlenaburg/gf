@@ -10,6 +10,7 @@ app.service("CreateSessionService", ["$http", function ($http) {
     };
 
     this.createSession = function (session) {
+
         return $http.post("/api/sessionMaster", session).then(function (response) {
             return response.data;
         }, function (response) {
@@ -26,17 +27,35 @@ app.service("CreateSessionService", ["$http", function ($http) {
 
 }]);
 
-app.controller("CreateSessionController", ["$scope", "CreateSessionService", "UserService", function ($scope, CreateSessionService, UserService) {
+app.controller("CreateSessionController", ["$scope", "$localStorage", "CreateSessionService", "UserService", "GamesService", function ($scope, $localStorage, CreateSessionService, UserService, GamesService) {
 
     $scope.session = {};
     $scope.sessions = [];
     $scope.userService = UserService;
+    $scope.store = $localStorage.storeId;
+    $scope.created = false;
 
-    (function getSessions() {
+
+    $scope.getGames = function getGames() {
+        GamesService.getGames().then(function (games) {
+            $scope.games = games;
+        });
+    };
+
+    $scope.createSession = function (session) {
+        session._store = $localStorage.store;
+        CreateSessionService.createSession(session).then(function(createdSession) {
+            console.log(createdSession);
+            $scope.createdSession = createdSession.session;
+            $scope.created = true;
+            toastr.success(createdSession.message.message)
+        })
+    }
+    function getSessions() {
         CreateSessionService.getSessions().then(function (sessions) {
             $scope.sessions = sessions;
         });
-    })();
+    };
 
     $scope.saveSession = function (session) {
         SessionsService.saveSession(session).then(function (session) {

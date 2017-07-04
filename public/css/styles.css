@@ -1,4 +1,69 @@
-.completed {
-    text-decoration: line-through;
-    font-style: italic;
+body {
+    background: url(/../images/new_year_background.png) repeat 0 0;
+}
+
+.bgTree {
+    background: url(/../images/new_year_background.png) repeat 0 0;
+}
+
+.bgPowStar {
+    background: url(/../images/pow-star.png) repeat 0 0;
+}
+
+.bgPaper {
+    background: url(/../images/textured_paper.png) repeat 0 0;
+}
+
+.dropShadow {
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.greenLetters {
+    color: #5cb85c;
+}
+
+.blueLetters {
+    color: #428bca;
+}
+
+.botPad {
+    padding-bottom: 10px;
+}
+
+.rightMargin {
+    margin-right: 100px;
+}
+
+.smallPic {
+    height: 20px;
+}
+
+.inset {
+    color: rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
+}
+
+.sideBySide {
+    display: inline-block;
+    margin-left: 12px;
+}
+.borderBox {
+    border: 2px solid black;
+
+}
+
+.bigFont {
+    font-size: 200%;
+}
+
+.biggerFont {
+    font-size: 150%;
+}
+.highlight {}
+
+.luckyFont {
+    font-family: 'Luckiest Guy', cursive;
+}
+.leftBuffer {
+    margin-left: 8px;
 }

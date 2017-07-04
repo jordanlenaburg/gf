@@ -31,7 +31,15 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    _sessionsJoined: [],
+    myStore: {
+        type: String,
+        ref: "Store"
+    },
+    _sessionsJoined: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Session'
+    }],
+    favoriteGames: [],
     resetPasswordToken: String,
     resetPasswordExpires: Date
 });

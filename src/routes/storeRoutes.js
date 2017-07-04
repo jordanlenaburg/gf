@@ -6,6 +6,8 @@ storeRouter.route("/")
     .get(function (req, res) {
         Store.find({
         }, function (err, stores) {
+            console.log('**')
+            console.log(stores)
             if (err) res.status(500).send(err);
             else res.send(stores);
         });

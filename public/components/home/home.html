@@ -1,24 +1,46 @@
-<span ng-hide="userService.isAuthenticated()"><a href="#/login"> <button>Login</button></a><span> Show Game Stores in your state!</span>
+<center>
+    <logo-full></logo-full>
+</center>
 
-</span>
-<br>
-<h2>Show Game Stores</h2>
-<span>Select state: </span>
+<div class="row">
 
-<select ng-model="selectedState" ng-options="state for state in states" ng-change="getStores(selectedState)">
-</select>
-<div>{{selectedState}}</div>
-<br>
-<div id="stateStores" class="panel panel-default" ng-repeat="store in stores">
-    <div class="panel-heading">
-        <h4>{{ store.name }}</h4>
-    </div>
-    <div class="panel-body">
-        <div class="pull-left">
-            <p>{{ store.phone }} | {{store.streetAddy}} {{store.city}}</p>
-            <p>{{store.hours}}</p>
-            <p>{{ store.description }}</p>
+    <div  class="col-md-2">
+        <div class="">
+            <span ng-hide="userService.isAuthenticated()">
+                <a href="#/login">
+                    <button class="btn btn-primary">
+                        Login
+                    </button>
+                </a>
+            </span>
+            <a href="#/games">List All Games</a>
+            <button class="btn btn-primary">fb</button>
+            <button class="btn btn-primary">blog</button>
         </div>
+
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <h2 class="panel-heading">Show Game Stores in Selected State</h2>
+            <div class="panel-body">
+                <span>Select State: </span>
+                <select ng-model="selectedState" ng-init="states[0]" ng-options="state for state in states" ng-change="getStores(selectedState)">
+                </select>
+            </div>
+        </div>
+        <br>
+        <div id="stateStores" class="panel panel-default" ng-repeat="store in stores">
+            <div class="panel-heading">
+                <h4>{{ store.name }}</h4>
+            </div>
+            <div class="panel-body">
+                <div class="pull-left">
+                    <p>{{ store.phone }} | {{store.streetAddy}} {{store.city}}</p>
+                    <p>{{store.hours}}</p>
+                    <p>{{ store.description }}</p>
+                </div>
+            </div>
+        </div>
+        <br>
     </div>
 </div>
-<br>

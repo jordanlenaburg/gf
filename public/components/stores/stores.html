@@ -1,17 +1,91 @@
 <div class="row">
-    <section class="col-md-6">
-
-        <div id="stateStores" class="panel panel-default" ng-repeat="store in stores" ng-model="choose">
-            <div class="panel-heading">
-                <h4>{{ store.name }}</h4>
-            </div>
-            <div class="panel-body">
-                <div class="pull-left">
-                    <p>{{ store.phone }} | {{store.streetAddy}} {{store.city}}</p>
-                    <p> {{store.hours}}</p>
-                    <p>{{ store.description }}</p>
+    <div class="col-md-offset-3 col-md-8">
+        <logo-full></logo-full>
+    </div>
+</div>
+<div class="row">
+    <section class="col-md-offset-2 col-md-8">
+        <div class="well row bgPowStar dropShadow">
+            <div class="">
+                <div class="col-md-6">
+                    <h4>Current State: {{newState}}</h4>
+                    <span>Choose a Different State:</span>
+                    <select ng-model="newState" ng-init="states[0]" ng-options="state for state in states" ng-change="changeState(newState)">
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <center>{{}}</center>
+                    <h4>My State: <button class="btn btn-success dropShadow" ng-click="getStores(myState)">{{myState}}</button></h4>
+                    <h4><span class="">My Store: <button class="btn btn-primary dropShadow">{{myStore}}</button></span><button class="glyphicon glyphicon-hand-left btn btn-primary sideBySide dropShadow" aria-hidden="true"></button></h4>
                 </div>
             </div>
+            <div class="">
+
+            </div>
         </div>
+    </section>
+
+    <section class="col-md-offset-2 col-md-8">
+
+        <div id="stateStores" class="panel panel-default dropShadow" ng-repeat="store in stores" ng-model="choose">
+            <div class="panel-heading bgPaper">
+                <h4 class="sideBySide bigFont">{{ store.name }} <a href="#" data-toggle="tooltip" data-placement="top" title="Make this my default store!"><button class="btn btn-primary btn-sm" ng-click="makeFavoriteStore(store._id)"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span></button></a><span class="sideBySide" style="font-size: 12px;">(make favorite)</span></h4>
+                <button type="button" class="sideBySide btn btn-success dropShadow" style="float: right;" ng-click="sessionCreator(store._id)">Create Session</button>
+                <button type="button" class="sideBySide btn btn-primary dropShadow" style="float: right;" ng-click="showSession = !showSession; getSessions(store._id)">Show Sessions</button>
+
+            </div>
+            <div class="panel-body bgPowStar">
+                <div class="">
+                    <p>Phone: {{ store.phone }} | Address: {{store.streetAddy}} {{store.city}}</p>
+                    <p>Hours: {{store.hours}}</p>
+                    <p>Description: {{ store.description }}</p>
+                </div>
+                <!--toggle sessions-->
+
+                <h3 class="highlight row" ng-show="showSession"><center>Open Sessions at This Store</center></h3>
+                <div class="col-md-offset-1 col-md-10" ng-show="showSession" ng-repeat="session in storeSessions">
+                    <div class="row well dropShadow bgTree">
+                        <div class="panel panel-primary dropShadow bgPaper">
+                            <h3 class="leftBuffer botPad"><span class="blueLetters">Title:</span> {{session.title}} <button  class="btn btn-primary rightMargin dropShadow" style="float:right;" ng-click="deleteMySession(session._id)">Delete Session</button></h3>
+                            <h3><span class="greenLetters">Game: </span> {{session._game.name}} </h3>
+                        </div>
+                        <div class=" panel-body">
+                            <div class="row">
+                                <div class="col-md-6 pull-right">
+                                    <button ng-if="session._players.length < session.maxPlayers" class="btn btn-primary sideBySide dropShadow" style="float: right" ng-click="joinSession(session._id)">Join Session</button>
+                                    <br/>
+                                    <br/>
+                                    <button class="btn btn-success sideBySide dropShadow" style="float: right" ng-click="exitSession(session._id)">Exit Session</button>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <h4>Date: {{session.dateOfSession | date}} @ {{session.timeStart}} </h4>
+                                    <h4 ng-show="{{session.estimagedGameLength}}"> How Long: {{session.estimatedGameLength}}</h4>
+                                    <h4 ng-show="{{session.minPlayers}}">Min. Players: {{session.minPlayers}}</h4>
+                                    <h4 ng-show="{{session.maxPlayers}}">Max. Players: {{session.maxPlayers}}</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-6 well dropShadow">
+                                    <h3><center>Players</center></h3>
+                                    <center ng-repeat="player in session._players">{{player.username}}</center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
     </section>
 </div>

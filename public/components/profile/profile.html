@@ -1,11 +1,38 @@
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-       <h3>Your Profile</h3>
-        <h1>{{ userService.currentUser.name }}</h1>
-        <hr>
+<div class="row" ng-init="getSessions()">
+    <div class="col-md-8 col-md-offset-2 well dropShadow">
+        <div class="row well panel panel-default ">
+            <h1 class="panel-heading bgPaper dropShadow"><center class="">PROFILE</center></h1>
+            <div class="panel-body">
+                <h1>User: {{ user.username }} </h1>
+                <h2>Email: {{ user.email }}</h2>
+                <h3>Member since: {{ user.dateJoined | date }}</h3>
+                <h3>My Store: {{ user.myStore.name }}</h3>
+                <h3><center ng-if="user.favoriteGames[0]">Favorite Games</center></h3>
+                <div ng-repeat="game in user.favoriteGames" class="well">
+                    <h3>Game: {{ game.name }}</h3>
+                </div>
+            </div>
+            <div class="panel-footer well">
+                <center>
+                    <h3 ng-if="user._sessionsJoined[0]"> Sessions </h3></center>
+                <div ng-repeat="session in user._sessionsJoined" class="col-md-offset-1 col-md-10 well dropShadow biggerFont">
+                    <div>
+                        <span>Title: {{ session.title }}</span>
+                        <button ng-show="{{ session.isOwner }}" class="pull-right btn btn-primary sideBySide" ng-click="exitSession(session._id)">Leave Session</button>
+                        <button ng-hide="{{ session.isOwner }}" class="pull-right btn btn-success sideBySide" ng-click="deleteMySession(session._id)">Delete Session</button>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!--        //change password-->
         <div class="row">
-            <div class="col-md-4">
-                <h3>Change Password</h3>
+            <div class="col-md-12 well">
+                <h3><center>Change Password</center></h3>
                 <form>
                     <div class="form-group">
                         <label for="newPassword">New Password</label>
@@ -16,6 +43,8 @@
                         <input type="password" id="newPasswordRepeat" class="form-control" ng-model="passwords.newPasswordRepeat">
                     </div>
                     <button class="btn btn-primary" ng-click="changePassword(passwords)">Change Password</button>
+                    <br>
+                    <br>
                 </form>
             </div>
         </div>

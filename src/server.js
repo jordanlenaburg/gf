@@ -26,7 +26,7 @@ app.use("/games", require("./routes/gameRoutes"));
 app.use("/stores/", require("./routes/storeRoutes"));
 
 app.use("/api/sessionMaster", require("./routes/sessionRoutes"));
-app.use("/allSessions", require("./routes/allSessionsRoutes"));
+app.use("/storeSessions", require("./routes/allSessionsRoutes"));
 
 
 app.listen(port, function() {

@@ -7,31 +7,48 @@ var sessionSchema = new Schema({
         required: true
     },
     dateOfSession: {
-        type: String,
-        required: true
+        type: Date
+        //required: true
     },
-    dateCreated: {
+    expireDate: {
+        type: Date,
+        expires: 0
+    },
+    createdAt: {
         type: Date,
         default: Date.now
     },
     timeStart: {
-        type:String,
-        required: true
+        type: String
+            //        required: true
     },
     minPlayers: {
-        type: Number,
-        required: true
+        type: Number
+            //        required: true
     },
     maxPlayers: {
-        type: Number,
-        required: true
+        type: Number
+            //        required: true
     },
     estimatedGameLength: String,
-    _game:[{type: Number, ref: 'Game' }],
-    _owner: [{ type: Number, ref: 'User' }],
-    _players: [{ type: Schema.Types.ObjectId, ref: 'User'}],
+    _store: {
+        type: String,
+        ref: 'Store'
+    },
+    _game: {
+        type: String,
+        ref: 'Game'
+    },
+    _owner: {
+        type: String,
+        ref: 'User'
+    },
+    _players: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }],
     description: String,
     referenceWebsite: String
 });
 
-module.exports = mongoose.model("Game", gameSchema);
+module.exports = mongoose.model("Session", sessionSchema);

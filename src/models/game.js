@@ -6,9 +6,15 @@ var gameSchema = new Schema({
         type: String,
         required: true
     },
+    needEquipment: {
+        type: Boolean,
+        default: false
+    },
+    minPlayers: Number,
     maxPlayers: Number,
     description: String,
-    referenceWebsite: String
+    referenceWebsite1: String,
+    referenceWebsite2: String
 });
 
 module.exports = mongoose.model("Game", gameSchema);

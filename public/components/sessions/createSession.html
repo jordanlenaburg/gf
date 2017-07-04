@@ -1,49 +1,75 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h1>Create a Game Session</h1>
+        <h2 ng-show="created">Wow, you've created a Gaming Session!</h2>
+        <h3 ng-show="created">You're one with the force...or something.</h3>
+        <h2 ng-hide="created">Create a Game</h2>
 
-        <form>
-            <div class="form-group">
-                <label for="title">What are you calling this little shindig?</label>
-                <input type="text" id="title" class="form-control" ng-model="session.title">
-            </div>
+        <div class="row" ng-init="getGames()">
+            <form ng-hide="created" class="col-md-12">
+                <div class="form-group">
+                    <label for="title">What are you calling this little shindig?</label>
+                    <input type="text" id="title" class="form-control" ng-model="session.title">
+                </div>
 
-            <div class="form-group">
-                <label for="sessionName">Which game are we playing?</label>
-                <input type="text" id="game" class="form-control" ng-model="session._game">
-            </div>
+                <div class="form-group">
+                    <br>
+                    <label for="sessionName">Which game are we playing?</label>
+                    <select ng-model="session._game" ng-options="game as game.name for game in games">
+                    </select>
+                    <br>
+                </div>
 
-            <div class="form-group">
-                <label for="minplayers">Miniumum players?</label>
-                <input type="text" id="minplayers" class="form-control" ng-model="session.minPlayers">
-            </div>
+                <div class="form-group">
+                    <label for="minplayers">Miniumum players</label>
+                    <input type="text" id="minplayers" class="form-control" ng-model="session.minPlayers">
+                </div>
 
-            <div class="form-group">
-                <label for="MaxPlayers">Max players?</label>
-                <input type="text" id="maxplayers" class="form-control" ng-model="session.maxPlayers">
-            </div>
+                <div class="form-group">
+                    <label for="MaxPlayers">Max players</label>
+                    <input type="text" id="maxplayers" class="form-control" ng-model="session.maxPlayers">
+                </div>
 
-            <div class="form-group">
-                <label for="dateOfSession">Date of the Game?</label>
-                <input type="date" id="dateOfSession" class="form-control" ng-model="session.dateOfSession">
-            </div>
+                <div class="form-group">
+                    <label for="dateOfSession">Date of the Game</label>
+                    <input type="date" id="dateOfSession" class="form-control" ng-model="session.dateOfSession">
+                </div>
 
-            <div class="form-group">
-                <label for="timeStart">Time Start?</label>
-                <input type="text" id="timeStart" class="form-control" ng-model="session.timeStart">
-            </div>
+                <div class="form-group">
+                    <label for="timeStart">Time Start <span class="smallText">(6pm or 3:15pm)</span></label>
+                    <input type="text" id="timeStart" class="form-control" ng-model="session.timeStart">
+                </div>
 
-            <div class="form-group">
-                <label for="estimatedGameLength">Additional info?</label>
-                <input type="text" id="estimatedGameLength" class="form-control" ng-model="session.estimatedGameLength">
-            </div>
+                <div class="form-group">
+                    <label for="estimatedGameLength">Estimated Play Time</label>
+                    <input type="text" id="estimatedGameLength" class="form-control" ng-model="session.estimatedGameLength">
+                </div>
 
-            <div class="form-group">
-                <label for="description">Additional info?</label>
-                <input type="text" id="description" class="form-control" ng-model="session.description">
-            </div>
+                <div class="form-group">
+                    <label for="description">Additional info</label>
+                    <input type="text" id="description" class="form-control" ng-model="session.description">
+                </div>
 
-            <button class="center-block btn btn-primary btn-lg" ng-click="createSession(session)">Create Game Session</button>
-        </form>
+                <button class="center-block btn btn-primary btn-lg" ng-click="createSession(session)">Create Game Session</button>
+            </form>
+
+            <br>
+            <br>
+            <section ng-show="created" class="col-md-12 panel panel-default">
+                    <div class="panel-heading">
+                        <h4>Your Session Title: {{ createdSession.title }}</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="pull-left">
+                            <h4>Game: {{ createdSession._game }} </h4>
+                            <h4>Min Players: {{createdSession.minPlayers}}</h4>
+                            <h4>Max Players:  {{createdSession.maxPlayers}}</h4>
+                            <h4>Date: {{createdSession.dateOfSession | date : format : timezone }} </h4>
+
+                        </div>
+                </div>
+            </section>
+            <center ng-show="created"><a href="#/profile" class="btn btn-success">Profile</a></center>
+
+        </div>
     </div>
 </div>

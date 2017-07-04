@@ -1,25 +1,27 @@
 var express = require("express");
 var allSessionsRouter = express.Router();
-var allSessions = require("../models/game");
 
-allSessionsRouter.route("/")
+var Store = require("../models/store");
+var Session = require("../models/session");
+var Game = require("../models/game")
+
+allSessionsRouter.route("/:storeId")
     .get(function (req, res) {
-        allSessions.find({
-            user: req.user._id
-        }, function (err, sessions) {
-            if (err) res.status(500).send(err);
-            else res.send(sessions);
-        });
+        Session.
+        find({
+            _store: req.params.storeId
+        }).
+        populate('_game').
+        populate('_players').
+        populate('_owner').
+        exec(function (err, sessions) {
+            console.log(sessions);
+            if (err) {
+                return handleError(err)
+            } else {
+                res.status(201).send(sessions);
+            }
+        })
     })
-//allSessionsRouter.route("/:sessionId")
-//    .get(function (req, res) {
-//        allSessions.findOne({
-//            _id: req.params.sessionId,
-//            user: req.user._id
-//        }, function (err, game) {
-//            if (err) res.status(500).send(err);
-//            else res.send(session);
-//        });
-//    })
 
 module.exports = allSessionsRouter;

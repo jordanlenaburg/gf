@@ -36,16 +36,23 @@ app.config(["$routeProvider", function ($routeProvider) {
         })
 }]);
 
-app.service("UserService", ["$http", "$location", "TokenService", function ($http, $location, TokenService) {
+app.service("UserService", ["$http", "$location", "$localStorage", "TokenService", function ($http, $location, $localStorage, TokenService) {
     var self = this;
     this.currentUser = {};
 
+    this.getSessions = function (){
+        return $http.get("api/sessionMaster/sessions").then(function(response) {
+            return response.data;
+        })
+    }
+
     this.signup = function (user) {
-        console.log('actual service -->')
+        $localStorage.$reset();
         return $http.post("/auth/signup", user);
     };
 
     this.login = function (user) {
+        $localStorage.$reset();
         return $http.post("/auth/login", user).then(function (response) {
             TokenService.setToken(response.data.token, response.data.state);
             self.currentUser = response.data.user;
@@ -59,7 +66,6 @@ app.service("UserService", ["$http", "$location", "TokenService", function ($htt
     };
 
     this.changePassword = function (newPassword) {
-        console.log(newPassword);
         return $http.post("/auth/change-password", {
             newPassword: newPassword
         }).then(function (response) {

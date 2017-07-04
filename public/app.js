@@ -4,7 +4,7 @@ app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
         .when("/", {
             templateUrl: "components/home/home.html",
-            controller: "StoresController"
+            controller: "HomeController"
         })
         .when("/games", {
             templateUrl: "components/games/games.html",
@@ -19,7 +19,7 @@ app.config(["$routeProvider", function ($routeProvider) {
             controller: "findSessionsController"
         })
         .when("/createSession", {
-            templateUrl: "components/sessions/sessions.html",
+            templateUrl: "components/sessions/createSession.html",
             controller: "CreateSessionController"
         })
         .when("/showStores", {
