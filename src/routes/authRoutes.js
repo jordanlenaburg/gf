@@ -19,14 +19,19 @@ authRouter.post("/login", function (req, res) {
                     message: "User with the provided username was not found"
                 });
             } else {
-                if (user.mystore) {
-                    Store.findOne({
-                        _id: user.myStore
-                    }, function (err, store) {
-                        if (err) res.status(500).send(err);
-                    })
-                    user.myStore = store.name;
-                }
+
+                Store.findOne({
+                    _id: user.myStore
+                }, function (err, store) {
+                    if (err) res.status(500).send(err);
+                    else {
+                        user.myStore = store.name;
+                        console.log('----authRoutes.js---store.findOne')
+                        console.log(user)
+                    }
+                })
+
+
                 user.checkPassword(req.body.password, function (err, match) {
                     if (err) {
                         res.status(500).send(err);

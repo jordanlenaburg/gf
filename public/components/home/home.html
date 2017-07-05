@@ -1,46 +1,54 @@
-<center>
-    <logo-full></logo-full>
-</center>
+<div class="jumbotron vertical-center">
+    <div class="container">
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-offset-3 col-md-3  animated bounceInDown logoFont">
+                <span class="">
+                    <span class="blackLetters">Game</span><span class="blueLetters">Finder
+                    </span>
+                </span>
+            </div>
+            <div class="col-md-offset-1 col-md-3"><img src="/images/eyeLogo.svg" class="inBlock" alt="The Eye Logo"></div>
+            <br>
 
-<div class="row">
-
-    <div  class="col-md-2">
-        <div class="">
-            <span ng-hide="userService.isAuthenticated()">
-                <a href="#/login">
-                    <button class="btn btn-primary">
-                        Login
-                    </button>
-                </a>
-            </span>
-            <a href="#/games">List All Games</a>
-            <button class="btn btn-primary">fb</button>
-            <button class="btn btn-primary">blog</button>
         </div>
 
-    </div>
-    <div class="col-md-8">
-        <div class="panel panel-default">
-            <h2 class="panel-heading">Show Game Stores in Selected State</h2>
-            <div class="panel-body">
-                <span>Select State: </span>
-                <select ng-model="selectedState" ng-init="states[0]" ng-options="state for state in states" ng-change="getStores(selectedState)">
-                </select>
+
+        <div class="row">
+            <br>
+            <br>
+            <div class="col-md-offset-1 col-md-10 bigFont colorBlack animated bounce">If you're like me you love to play table top games like Settlers of Catan, Magic: The Gathering and Game of Thrones AND you don't get to play them as much as you would like. It's hard to find players, hard to schedule games that work for everyone, etc. <br><br><center>Enter GameFinder....Find Players. Find Games. <br></center>
+
             </div>
+            <br>
+            <br>
         </div>
-        <br>
-        <div id="stateStores" class="panel panel-default" ng-repeat="store in stores">
-            <div class="panel-heading">
-                <h4>{{ store.name }}</h4>
-            </div>
-            <div class="panel-body">
-                <div class="pull-left">
-                    <p>{{ store.phone }} | {{store.streetAddy}} {{store.city}}</p>
-                    <p>{{store.hours}}</p>
-                    <p>{{ store.description }}</p>
-                </div>
-            </div>
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <button class="col-md-offset-5 col-md-2 animated bounceInUp btn btn-lg btn-primary">
+                Get Started
+            </button>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
-        <br>
     </div>
 </div>

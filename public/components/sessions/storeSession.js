@@ -1,6 +1,6 @@
 var app = angular.module("GamesApp");
 
-app.service("StoresService", ["$http", "$localStorage", function ($http, $localStorage) {
+app.service("StoreSessionService", ["$http", "$localStorage", function ($http, $localStorage) {
 
     this.getStores = function () {
         var state = $localStorage.state;
@@ -21,6 +21,7 @@ app.service("StoresService", ["$http", "$localStorage", function ($http, $localS
     }
 
     this.getSessions = function (storeId) {
+        console.log(storeId)
         return $http.get("/storeSessions/" + storeId).then(function (response) {
             return response.data;
         })
@@ -47,48 +48,33 @@ app.service("StoresService", ["$http", "$localStorage", function ($http, $localS
 
 }]);
 
-app.controller("StoresController", ["$scope", "$localStorage", "$location", "StoresService", "UserService", function ($scope, $localStorage, $location, StoresService, UserService) {
+app.controller("StoreSessionController", ["$scope", "$localStorage", "$location", "StoreSessionService", "UserService", function ($scope, $localStorage, $location, StoreSessionService, UserService) {
 
-    $scope.store = {};
-    $scope.stores = [];
     $scope.userService = UserService;
     $scope.showSession = false;
     $scope.showJoinButton = true;
     $scope.size = 1;
     $scope.myState = $localStorage.state;
     $scope.myStore = $localStorage.myStore || 'None';
+    $scope.storeId = $localStorage.storeInfo.storeId;
+    $scope.storeName = $localStorage.storeInfo.storeName;
+    $scope.name = $localStorage.name;
 
-    $scope.states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
-    $scope.getStores = function () {
-        StoresService.getStores().then(function (stores) {
-            $scope.stores = stores;
-            if ($localStorage.state) $scope.newState = $localStorage.state;
-            $scope.cities = [];
-            $scope.games = [];
-            for (var i=0;i<stores.length;i++){
-                if ($scope.cities.indexOf(stores[i].city) === -1){
-                    console.log('in loop')
-                    console.log(stores[i])
-                    $scope.cities.push(stores[i].city)
-                }
-            }
-
-        });
-    };
-    $scope.getStores();
-
-    $scope.getStoreSessions = function (storeId, storeName) {
-        $localStorage.storeInfo = {storeId: storeId, storeName: storeName};
-        $location.path('/storeSession')
+    $scope.getSessions = function (storeId) {
+        StoreSessionService.getSessions(storeId).then(function (storeSessions) {
+            $scope.sessions = storeSessions;
+            console.log(storeSessions)
+        })
     }
+    $scope.getSessions($scope.storeId);
 
     $scope.deleteMySession = function (sessionId) {
         console.log('sessionId: ' + sessionId);
-        StoresService.deleteMySession(sessionId).then(function (response) {
+        StoreSessionService.deleteMySession(sessionId).then(function (response) {
             toastr.success(response.message)
             $scope.stores = [];
-        }, function (response){
+        }, function (response) {
             toastr.error(response.message)
         })
 
@@ -97,8 +83,8 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.makeFavoriteStore = function (storeId, storeName) {
         $scope.myStore = storeName;
         $localStorage.myStore = storeName;
-//
-        StoresService.makeFavoriteStore(storeId).then(function (response) {
+        //
+        StoreSessionService.makeFavoriteStore(storeId).then(function (response) {
             console.log(response)
             $location.path("/showStores")
             toastr.success(response.message)
@@ -108,27 +94,14 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
         $scope.stores = $scope.stores;
     }
 
-    $scope.changeState = function (newState) {
-        StoresService.byStateGetStores(newState).then(function (stores) {
-            $scope.stores = stores
-        })
-    }
 
     $scope.sessionCreator = function (id) {
         $localStorage.store = id;
         $location.path('/createSession');
     }
 
-    $scope.getSessions = function (storeId) {
-        StoresService.getSessions(storeId).then(function (storeSessions) {
-            $scope.storeSessions = storeSessions;
-            console.log('----getSessions')
-            console.log(storeSessions)
-        })
-    }
-
     $scope.joinSession = function (sessionId) {
-        StoresService.joinSession(sessionId).then(function (response) {
+        StoreSessionService.joinSession(sessionId).then(function (response) {
             console.log(response)
             toastr.success(response.data.message);
             $location.path("/showStores");
@@ -138,7 +111,7 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     }
 
     $scope.exitSession = function (sessionId) {
-        StoresService.exitSession(sessionId).then(function (response) {
+        StoreSessionService.exitSession(sessionId).then(function (response) {
             toastr.success(response.data.message)
             $location.path("/showStores");
         }, function (response) {

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.5.2",
     "async": "^2.4.0",
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",

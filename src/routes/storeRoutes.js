@@ -4,8 +4,7 @@ var Store = require("../models/store");
 
 storeRouter.route("/")
     .get(function (req, res) {
-        Store.find({
-        }, function (err, stores) {
+        Store.find({}, function (err, stores) {
             console.log('**')
             console.log(stores)
             if (err) res.status(500).send(err);
@@ -24,14 +23,24 @@ storeRouter.route("/")
 
 storeRouter.route("/:state")
     .get(function (req, res) {
-        console.log("--see state below: route")
-        console.log(req.params.state);
         Store.find({
             state: req.params.state
-        }, function (err, store) {
-            if (err) res.status(500).send(err);
-            else res.send(store);
-        });
+        }).
+        populate('_sessions').
+        exec(function (err, stores) {
+            if (err) res.status(500).send(err)
+            else {
+                res.status(201).send(stores);
+            }
+        })
+
+
+        //        Store.find({
+        //            state: req.params.state
+        //        }, function (err, store) {
+        //            if (err) res.status(500).send(err);
+        //            else res.send(store);
+        //        });
     })
     //    .put(function (req, res) {
     //        Store.findOneAndUpdate({

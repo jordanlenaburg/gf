@@ -1,5 +1,9 @@
 body {
-    background: url(/../images/new_year_background.png) repeat 0 0;
+    background: white;
+}
+
+.bgWhite {
+    background: white;
 }
 
 .bgTree {
@@ -18,12 +22,18 @@ body {
     box-shadow: 10px 10px 5px #888888;
 }
 
-.greenLetters {
-    color: #5cb85c;
+.blackLetters {
+    color: black;
+    font-weight: 800;
 }
 
 .blueLetters {
-    color: #428bca;
+    color: #0099FF;
+    font-weight: 180;
+}
+
+.blue {
+    color:#0099FF;
 }
 
 .botPad {
@@ -47,23 +57,97 @@ body {
     display: inline-block;
     margin-left: 12px;
 }
+
 .borderBox {
     border: 2px solid black;
-
 }
 
 .bigFont {
-    font-size: 200%;
+    font-size: 160%;
 }
 
 .biggerFont {
     font-size: 150%;
 }
-.highlight {}
+
+.storeFont {
+    font-size: 125%;
+}
+.storeFont2 {
+    font-size: 110%;
+}
 
 .luckyFont {
     font-family: 'Luckiest Guy', cursive;
 }
+
 .leftBuffer {
     margin-left: 8px;
+}
+/*----------navbar------------*/
+
+.fA {
+    font-size: 320px;
+}
+
+/*---------------home page-----------------*/
+
+.jumbotron {
+    background: url(../images/dndTable.jpg) no-repeat fixed 50% 0px / cover;
+    box-shadow: inset 0 0 0 1000px rgba(216, 216, 236, 0.6);
+    padding: 0 0 0 0;
+    margin-bottom: 70px;
+    margin-top: -20px;
+}
+
+.inBlock {
+    display: inline-block
+}
+
+.layer {
+    background-color: rgba(216, 216, 232, 0.4);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.centerIt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottomIt {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.centerItItem {
+    margin-top: -190px;
+    max-width: 50%;
+}
+
+.logoFont {
+    font-size: 570%;
+}
+
+.pushRight {
+    margin-right: -75px;
+}
+
+.pushDown {
+    margin-top: 240px;
+}
+
+.pullUp {
+    margin-top: -80px;
+}
+
+.colorBlack {
+    color: black;
+}
+
+.font140 {
+    font-size: 140%;
 }

@@ -26,5 +26,9 @@ app.config(["$routeProvider", function ($routeProvider) {
             templateUrl: "components/stores/stores.html",
             controller: "StoresController"
         })
+        .when("/storeSession", {
+            templateUrl: "components/sessions/storeSession.html",
+            controller: "StoreSessionController"
+    })
 
 }]);

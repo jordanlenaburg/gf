@@ -1,0 +1,61 @@
+<div class="row">
+    <section class="col-md-3">
+        <div class="well row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-10 font140">{{myState}} </div>
+                    <div class="col-md-2 font140" ng-click="getStores(myState)"><i class="fa fa-arrow-left blue"></i></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 font140">{{myStore}}</div>
+                    <div class="col-md-2 font140"><i style="color:red;" class="fa fa-heart"></i> </div>
+
+                </div>
+            </div>
+            <br>
+
+
+
+        </div>
+        <div class="well row">
+            <div class="col-md-12">
+                <div class="col-md-10 font140">{{storeName}}</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="col-md-9">
+
+        <div id="" class="panel panel-default col-sm-6 " ng-repeat="session in sessions" ng-model="choose">
+            <div class="panel-heading bgPaper">
+                <h4 class="row font140">
+                    <div class="col-sm-7 biggerFont">{{ session.title }}</div>
+                    <div class="col-sm-3 biggerFont sideBySide"><a href="#" data-toggle="tooltip" data-placement="top" title="Join Session"><i ng-click="joinSession(session._id)" class="fa fa-plus-circle blue"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Session"><i class="sideBySide fa fa-remove font140" style="color:red;" ng-click="deleteMySession(session._id)"></i></a></div>
+                </h4>
+            </div>
+            <div class="panel-body bgWhite">
+                <div class="row storeFont">
+                    <div></div>
+                    <div class="col-md-offset-2 col-md-7 storeFont2">
+                        <div><a href="#" data-toggle="tooltip" data-placement="top" title="Game being played."><i class="fa fa-optin-monster"></i></a><span>{{ session._game.name }}</span></div>
+                        <div><a href="#" data-toggle="tooltip" data-placement="top" title="Date Created"><i class="fa fa-calendar-o blue"></i></a> <span>{{ session.createdAt | date }}</span></div>
+                        <div><a href="#" data-toggle="tooltip" data-placement="top" title="Session Date"><i class="fa fa-calendar-check-o blue"></i></a> <span>{{ session.dateOfSession | date}}</span></div>
+                        <div><a href="#" data-toggle="tooltip" data-placement="top" title="Start Time"><i class="fa fa-spinner"></i> </a><span> {{session.timeStart}}</span></div>
+                        <div><a href="#" data-toggle="tooltip" data-placement="top" title="Game Length"><i class="fa fa-hourglass"></i></a> <span>{{ session.estimatedGameLength}}</span></div>
+                        <div><a href="#" data-toggle="tooltip" data-placement="top" title="Min & Max Players"><i class="fa fa-user-plus"></i></a><span> Min/Max: </span> {{ session.minPlayers}} - {{session.maxPlayers}}</div>
+                        <div><i class="fa fa-comment "></i> <span>{{ session.description }}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <center class="font140">Players</center>
+                <div class="row" ng-repeat="player in session._players">
+                    <div class="col-md-offset-2 col-md-7 font140">{{player.username}}</div>
+                    <div class="col-md-2" ng-if='player.username == name'>
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="Exit Session"><i ng-click="exitSession(session._id)" class="fa fa-times" style="color:red;"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
