@@ -7,6 +7,8 @@ app.controller("LoginController", ["$scope", "$location", "$localStorage", "User
             $localStorage.state = response.data.user.state;
             $localStorage.myStore = response.data.user.myStore;
             $localStorage.name = response.data.user.username;
+            $localStorage.userId = response.data.user._id;
+            console.log(response.data.user)
             $location.path("/showStores");
         }, function(response) {
             toastr.error(response.data.message);

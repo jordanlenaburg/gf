@@ -175,10 +175,12 @@ sessionRouter.route("/")
 sessionRouter.route("/sessions")
     .get(function (req, res) {
         User.findOne({
-            _id: req.user._id
+                _id: req.user._id
+            }).
+            //        populate('_sessionsJoined').
+        populate({
+            path: '_sessionsJoined'
         }).
-//        populate('_sessionsJoined').
-        populate({ path:'_sessionsJoined'}).
         populate('_game').
         populate('myStore').
         exec(function (err, user) {
@@ -311,6 +313,22 @@ sessionRouter.route("/joinSession/:sessionId")
 
 
     }) //end of route
+
+sessionRouter.route("/getUser")
+    .get(function (req, res) {
+        console.log(req.user)
+        User.findOne({
+                _id: req.user._id
+            },
+            function (err, user) {
+                if (err) res.status(500).send(err);
+                else {
+                    console.log('----sessionRoutes/getUser')
+                    console.log(user)
+                    res.send(user)
+                }
+            })
+    })
 
 sessionRouter.route("/:sessionId")
     .get(function (req, res) {

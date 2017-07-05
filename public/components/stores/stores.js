@@ -8,6 +8,13 @@ app.service("StoresService", ["$http", "$localStorage", function ($http, $localS
             return response.data;
         });
     };
+
+    this.getStoreByName = function (storeName) {
+        return $http.get("/stores/getStoreByName/" + storeName).then(function (response){
+            return response.data;
+        })
+    }
+
     this.byStateGetStores = function (state) {
         return $http.get("/stores/" + state).then(function (response) {
             return response.data;
@@ -23,6 +30,12 @@ app.service("StoresService", ["$http", "$localStorage", function ($http, $localS
     this.getSessions = function (storeId) {
         return $http.get("/storeSessions/" + storeId).then(function (response) {
             return response.data;
+        })
+    }
+
+    this.getUser = function (userId) {
+        return $http.get("/api/sessionMaster/getUser").then(function (response) {
+            return response.data
         })
     }
 
@@ -58,33 +71,63 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.myState = $localStorage.state;
     $scope.myStore = $localStorage.myStore || 'None';
 
-    $scope.states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    $scope.states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+    $scope.getUser = function () {
+        StoresService.getUser($localStorage.userId).then(function (user){
+            $scope.user = user;
+        })
+    }
 
     $scope.getStores = function () {
         StoresService.getStores().then(function (stores) {
             $scope.stores = stores;
+            $scope.storesFull = stores;
             if ($localStorage.state) $scope.newState = $localStorage.state;
             $scope.cities = [];
+            $scope.cities.push("None");
+            $scope.cityFilter = $scope.cities[0];
             $scope.games = [];
+
             for (var i=0;i<stores.length;i++){
                 if ($scope.cities.indexOf(stores[i].city) === -1){
-                    console.log('in loop')
-                    console.log(stores[i])
                     $scope.cities.push(stores[i].city)
                 }
             }
-
+            if ($scope.cities.lenth > 0){
+                $scope.cityFilter = cities[0]
+            }
         });
     };
     $scope.getStores();
+
+    $scope.filterCity = function (cityFilter) {
+
+        var temp = [];
+        for (var i=0;i<$scope.storesFull.length;i++){
+            if ($scope.storesFull[i].city === $scope.cityFilter){
+                temp.push($scope.storesFull[i]);
+            } else if ($scope.cityFilter === "None"){
+                temp.push($scope.storesFull[i])
+            }
+        }
+        $scope.stores = temp;
+    }
 
     $scope.getStoreSessions = function (storeId, storeName) {
         $localStorage.storeInfo = {storeId: storeId, storeName: storeName};
         $location.path('/storeSession')
     }
 
+    $scope.getStoreByName = function () {
+        StoresService.getStoreByName($localStorage.myStore).then(function (store) {
+            $scope.myStoreInfo = store
+            $localStorage.storeInfo = {storeId: store._id, storeName: store.name};
+            $location.path('/storeSession')
+        })
+    }
+
     $scope.deleteMySession = function (sessionId) {
-        console.log('sessionId: ' + sessionId);
         StoresService.deleteMySession(sessionId).then(function (response) {
             toastr.success(response.message)
             $scope.stores = [];
@@ -99,7 +142,6 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
         $localStorage.myStore = storeName;
 //
         StoresService.makeFavoriteStore(storeId).then(function (response) {
-            console.log(response)
             $location.path("/showStores")
             toastr.success(response.message)
         }, function (response) {
@@ -122,14 +164,11 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.getSessions = function (storeId) {
         StoresService.getSessions(storeId).then(function (storeSessions) {
             $scope.storeSessions = storeSessions;
-            console.log('----getSessions')
-            console.log(storeSessions)
         })
     }
 
     $scope.joinSession = function (sessionId) {
         StoresService.joinSession(sessionId).then(function (response) {
-            console.log(response)
             toastr.success(response.data.message);
             $location.path("/showStores");
         }, function (response) {

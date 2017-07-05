@@ -21,6 +21,17 @@ storeRouter.route("/")
     //        });
     //    });
 
+
+storeRouter.route("/getStoreByName/:storeName")
+    .get(function(req,res){
+        Store.findOne({
+            name: req.params.storeName
+        }, function (err, store){
+            if (err) res.status(500).send(err)
+            else res.status(201).send(store)
+        })
+})
+
 storeRouter.route("/:state")
     .get(function (req, res) {
         Store.find({

@@ -1,35 +1,52 @@
-<div class="row">
+<div class="row bgPowStar">
     <section class="col-md-3">
-        <div class="well row">
-            <div class="col-md-12">
+        <div class="well row bgBlack">
+            <div class="col-md-12 well" ng-init="getUser();">
                 <div class="row">
-                    <div class="col-md-10 font140">{{myState}} </div>
+                    <div class="col-md-2 font140"><a href="#/profile" style="color:black;"><i class="fa fa-user-secret"></i></a></div>
+                    <div class="col-md-10 font140">{{user.username}}</div>
+                    <div class="col-md-2 font140"><i class="fa fa-envelope"></i></div>
+                    <div class="col-md-10 font140">{{user.email}}</div>
+
+                    <div class="col-md-2 font140" ng-click="getStores(myState)"><i class="fa fa-globe blue"></i></div>
+                    <div class="col-md-8 font140">{{myState}} </div>
                     <div class="col-md-2 font140" ng-click="getStores(myState)"><i class="fa fa-arrow-left blue"></i></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-10 font140">{{myStore}}</div>
+                    <div class="col-md-2 font140"><i ng-click="getStoreByName()" style="color:red;" class="fa fa-flash"></i> </div>
+                    <div class="col-md-8 font140" ng-click="getStoreByName()">{{myStore}}</div>
                     <div class="col-md-2 font140"><i style="color:red;" class="fa fa-heart"></i> </div>
 
                 </div>
             </div>
-            <br>
-            <br>
-            <br>
-            <select class="pullRight" ng-attr-size="{{size}}" ng-model="newState" ng-init="states[0]" ng-options="state for state in states" ng-change="changeState(newState)">
-            </select>
-            <br>
-            <br>
-            <select ng-attr-size="{{size}}" ng-model="cityFilter" ng-init="cities[1]" ng-options="city for city in cities" ng-change="filterCity(cityFilter)">
-            </select>
-
+            <div class="col-md-12 well">
+                <br>
+                <br>
+                <br>
+                State:<select class="pullRight" ng-attr-size="{{size}}" ng-model="newState" ng-init="states[0]" ng-options="state for state in states" ng-change="changeState(newState)">
+                </select>
+                <br>
+                <br>
+                City:<select ng-attr-size="{{size}}" ng-model="cityFilter" ng-init="cities[0]" ng-options="city for city in cities" ng-change="filterCity(cityFilter)">
+                </select>
+            </div>
+            <div class="col-md-12 well font140">
+                <div class="col-md-offset-0 col-md-11 font140">
+                    <i class="fa fa-google-plus sideBySide"></i>
+                    <i class="fa fa-facebook-official sideBySide"></i>
+                    <i class="fa fa-instagram sideBySide"></i>
+                    <i class="fa fa-reddit-alien sideBySide"></i>
+                    <i class="fa fa-pinterest-square sideBySide"></i>
+                </div>
+            </div>
 
         </div>
     </section>
 
     <section class="col-md-9">
 
-        <div id="" class="panel panel-default col-md-6 " ng-repeat="store in stores" ng-model="choose">
-            <div class="panel-heading bgPaper">
+        <div id="" class="panel panel-default col-md-6 bgBlue" ng-repeat="store in stores" ng-model="choose">
+            <div class="panel-heading">
                 <h4 class="sideBySide bigFont">
                     {{ store.name }}
                     <a href="#" ng-if="myStore !== store.name" data-toggle="tooltip" data-placement="top" title="Make this my default store!">
@@ -45,7 +62,7 @@
             <div class="panel-body bgWhite">
                 <div class="">
                     <div class="row storeFont">
-                       <div></div>
+                        <div></div>
                         <div class="col-md-7 storeFont2">
                             <i class="fa fa-phone blue"></i> <span>{{ store.phone }}</span>
                             <div><i class="fa fa-globe blue"></i> <span>{{store.streetAddy}} {{store.city}}</span></div>
@@ -77,7 +94,7 @@
             </div>
             <div class="panel-footer">
                 <center>
-                    <button class="btn btn-primary" ng-click="getStoreSessions(store._id,store.name)">Check It Out!</button>
+                    <button class="btn btn-primary bgWhite" ng-click="getStoreSessions(store._id,store.name)"><span class="font140" style="color:black;">Check It Out!</span></button>
                 </center>
             </div>
 

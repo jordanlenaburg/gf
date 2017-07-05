@@ -25,9 +25,9 @@ authRouter.post("/login", function (req, res) {
                 }, function (err, store) {
                     if (err) res.status(500).send(err);
                     else {
-                        user.myStore = store.name;
-                        console.log('----authRoutes.js---store.findOne')
-                        console.log(user)
+                        if (store) { //check if user has favorite store and populate it if so
+                            user.myStore = store.name;
+                        }
                     }
                 })
 

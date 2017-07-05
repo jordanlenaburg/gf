@@ -2,8 +2,27 @@ body {
     background: white;
 }
 
+.navbar {
+    margin-bottom: 0px;
+}
+
+.panel > .panel-heading,
+.panel-footer {
+    background-image: none;
+    background-color: #0099FF;
+    color: white;
+}
+
+.bgBlue {
+    background: rgb(0, 153, 255);
+}
+
 .bgWhite {
     background: white;
+}
+
+.bgBlack {
+    background: black;
 }
 
 .bgTree {
@@ -33,7 +52,7 @@ body {
 }
 
 .blue {
-    color:#0099FF;
+    color: #0099FF;
 }
 
 .botPad {
@@ -73,6 +92,7 @@ body {
 .storeFont {
     font-size: 125%;
 }
+
 .storeFont2 {
     font-size: 110%;
 }
@@ -84,11 +104,14 @@ body {
 .leftBuffer {
     margin-left: 8px;
 }
+
+
 /*----------navbar------------*/
 
 .fA {
     font-size: 320px;
 }
+
 
 /*---------------home page-----------------*/
 
@@ -150,4 +173,8 @@ body {
 
 .font140 {
     font-size: 140%;
+}
+
+.topGutter {
+    margin-top: 100px;
 }
