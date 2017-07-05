@@ -10,7 +10,7 @@ app.service("StoresService", ["$http", "$localStorage", function ($http, $localS
     };
 
     this.getStoreByName = function (storeName) {
-        return $http.get("/stores/getStoreByName/" + storeName).then(function (response){
+        return $http.get("/stores/getStoreByName/" + storeName).then(function (response) {
             return response.data;
         })
     }
@@ -74,7 +74,7 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
     $scope.getUser = function () {
-        StoresService.getUser($localStorage.userId).then(function (user){
+        StoresService.getUser($localStorage.userId).then(function (user) {
             $scope.user = user;
         })
     }
@@ -89,12 +89,12 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
             $scope.cityFilter = $scope.cities[0];
             $scope.games = [];
 
-            for (var i=0;i<stores.length;i++){
-                if ($scope.cities.indexOf(stores[i].city) === -1){
+            for (var i = 0; i < stores.length; i++) {
+                if ($scope.cities.indexOf(stores[i].city) === -1) {
                     $scope.cities.push(stores[i].city)
                 }
             }
-            if ($scope.cities.lenth > 0){
+            if ($scope.cities.lenth > 0) {
                 $scope.cityFilter = cities[0]
             }
         });
@@ -104,10 +104,10 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.filterCity = function (cityFilter) {
 
         var temp = [];
-        for (var i=0;i<$scope.storesFull.length;i++){
-            if ($scope.storesFull[i].city === $scope.cityFilter){
+        for (var i = 0; i < $scope.storesFull.length; i++) {
+            if ($scope.storesFull[i].city === $scope.cityFilter) {
                 temp.push($scope.storesFull[i]);
-            } else if ($scope.cityFilter === "None"){
+            } else if ($scope.cityFilter === "None") {
                 temp.push($scope.storesFull[i])
             }
         }
@@ -115,14 +115,20 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     }
 
     $scope.getStoreSessions = function (storeId, storeName) {
-        $localStorage.storeInfo = {storeId: storeId, storeName: storeName};
+        $localStorage.storeInfo = {
+            storeId: storeId,
+            storeName: storeName
+        };
         $location.path('/storeSession')
     }
 
     $scope.getStoreByName = function () {
         StoresService.getStoreByName($localStorage.myStore).then(function (store) {
             $scope.myStoreInfo = store
-            $localStorage.storeInfo = {storeId: store._id, storeName: store.name};
+            $localStorage.storeInfo = {
+                storeId: store._id,
+                storeName: store.name
+            };
             $location.path('/storeSession')
         })
     }
@@ -131,7 +137,7 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
         StoresService.deleteMySession(sessionId).then(function (response) {
             toastr.success(response.message)
             $scope.stores = [];
-        }, function (response){
+        }, function (response) {
             toastr.error(response.message)
         })
 
@@ -140,7 +146,7 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.makeFavoriteStore = function (storeId, storeName) {
         $scope.myStore = storeName;
         $localStorage.myStore = storeName;
-//
+        //
         StoresService.makeFavoriteStore(storeId).then(function (response) {
             $location.path("/showStores")
             toastr.success(response.message)
