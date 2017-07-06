@@ -101,7 +101,19 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
             }
         });
     };
-    $scope.getStores();
+    $scope.getStores();//init stores onload
+
+
+
+    $scope.filterCity = function (cityFilter) {
+        var temp = [];
+        for (var i=0;i<$scope.storesFull.length;i++){
+            if ($scope.storesFull[i].city === cityFilter) {
+                temp.push($scope.storesFull[i]);
+            }
+        }
+        $scope.stores = temp;
+    }
 
     $scope.filterByDate = function (dateFilter) {
         var temp = [];
