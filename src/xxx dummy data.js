@@ -1,8 +1,66 @@
 {
+    name: "Dungeons & Dragons",
+    needEquipment: true,
+    minPlayers: 2,
+    maxPlayers: 999,
+    description: "Creation of Character (with character sheet) which will play in a world governed by Dungeon Master (another player)",
+    referenceWebsite1: "http://dnd.wizards.com/",
+    referenceWebsite2: "https://en.wikipedia.org/wiki/Dungeons_%26_Dragons"
+
+}
+
+{
+    name: "Magic: The Gathering",
+        needEquipment: true,
+            minPlayers: 2,
+                maxPlayers: 999,
+                    description: "Strategy card game.",
+                        referenceWebsite1: "http://magic.wizards.com/en",
+                            referenceWebsite2: "https://en.wikipedia.org/wiki/Magic:_The_Gathering"
+
+}
+
+{
+    name: "Warhammer",
+    needEquipment: true,
+    minPlayers: 2,
+    maxPlayers: 999,
+    description: "Uses mini equipment to simulate war.",
+    referenceWebsite1: "https://warhammer40000.com/",
+    referenceWebsite2: "https://en.wikipedia.org/wiki/Warhammer"
+
+}
+{
+    name: "Firefly The Game",
+    needEquipment: false,
+    minPlayers: 3,
+    maxPlayers: 5,
+    description: "Uses mini equipment to simulate war.",
+    referenceWebsite1: "http://www.fireflythegame.com/",
+    referenceWebsite2: "https://www.facebook.com/FireflyBoardGame/"
+
+}
+
+{
+    name: "Settlers of Catan",
+    needEquipment: false,
+    minPlayers: 3,
+    maxPlayers: 6,
+    description: "International game of the year - uses resources to buy towns/cities",
+    referenceWebsite1: "http://www.catan.com/",
+    referenceWebsite2: "https://en.wikipedia.org/wiki/Catan"
+
+}
+
+
+
+//--------------------
+
+{
     name: "Game Night Games",
-        phone: "801-467-2400",
-        website: "http://www.gamenightgames.com/",
-            streetAddy: "2148 S. 900 E.",
+    phone: "801-467-2400",
+    website: "http://www.gamenightgames.com/",
+    streetAddy: "2148 S. 900 E.",
     city: "Salt Lake City",
     state: "Utah",
     zip: "84106",
