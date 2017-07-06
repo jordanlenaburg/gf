@@ -1,7 +1,7 @@
-<div class="row bgPowStar">
+<div class="row bgWhite">
     <section class="col-md-3">
         <div class="well row bgBlack">
-            <div class="col-md-12 well" ng-init="getUser();">
+            <div class="col-md-12 well">
                 <div class="row">
                     <div class="col-md-2 font140"><a href="#/profile" style="color:black;"><i class="fa fa-user-secret"></i></a></div>
                     <div class="col-md-10 font140">{{user.username}}</div>
@@ -29,6 +29,9 @@
                 <br>
                 City:<select ng-attr-size="{{size}}" ng-model="cityFilter" ng-init="cities[0]" ng-options="city for city in cities" ng-change="filterCity(cityFilter)">
                 </select>
+                <br>
+                <br>
+
             </div>
             <div class="col-md-12 well font140">
                 <div class="col-md-offset-0 col-md-11 font140">

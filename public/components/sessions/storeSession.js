@@ -69,6 +69,19 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
     }
     $scope.getSessions($scope.storeId);
 
+    $scope.filterCity = function (cityFilter) {
+
+        var temp = [];
+        for (var i = 0; i < $scope.storesFull.length; i++) {
+            if ($scope.storesFull[i].city === $scope.cityFilter) {
+                temp.push($scope.storesFull[i]);
+            } else if ($scope.cityFilter === "None") {
+                temp.push($scope.storesFull[i])
+            }
+        }
+        $scope.stores = temp;
+    }
+
     $scope.deleteMySession = function (sessionId) {
         console.log('sessionId: ' + sessionId);
         StoreSessionService.deleteMySession(sessionId).then(function (response) {

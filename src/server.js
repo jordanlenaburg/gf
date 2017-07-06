@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "..", "public")));
+//app.disable('etag'); //looking to eliminate 304 blank page error on 'createSession'--couldn't get it
 
 app.use("/api", expressJwt({secret: config.secret}));//added security prefix
 app.use("/auth/change-password", expressJwt({secret: config.secret}));

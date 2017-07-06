@@ -70,6 +70,7 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.size = 1;
     $scope.myState = $localStorage.state;
     $scope.myStore = $localStorage.myStore || 'None';
+    $scope.dateFilter = new Date();
 
     $scope.states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 
@@ -78,6 +79,7 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
             $scope.user = user;
         })
     }
+    $scope.getUser();
 
     $scope.getStores = function () {
         StoresService.getStores().then(function (stores) {
@@ -101,17 +103,11 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     };
     $scope.getStores();
 
-    $scope.filterCity = function (cityFilter) {
-
+    $scope.filterByDate = function (dateFilter) {
         var temp = [];
-        for (var i = 0; i < $scope.storesFull.length; i++) {
-            if ($scope.storesFull[i].city === $scope.cityFilter) {
-                temp.push($scope.storesFull[i]);
-            } else if ($scope.cityFilter === "None") {
-                temp.push($scope.storesFull[i])
-            }
+        for (var i=0;i<$scope.storesFull.length;i++){
+            if ($scope.storeFull[i].)
         }
-        $scope.stores = temp;
     }
 
     $scope.getStoreSessions = function (storeId, storeName) {

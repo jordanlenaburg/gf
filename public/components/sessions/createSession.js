@@ -45,7 +45,6 @@ app.controller("CreateSessionController", ["$scope", "$localStorage", "CreateSes
     $scope.createSession = function (session) {
         session._store = $localStorage.store;
         CreateSessionService.createSession(session).then(function(createdSession) {
-            console.log(createdSession);
             $scope.createdSession = createdSession.session;
             $scope.created = true;
             toastr.success(createdSession.message.message)
