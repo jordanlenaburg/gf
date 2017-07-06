@@ -106,7 +106,9 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
     $scope.filterByDate = function (dateFilter) {
         var temp = [];
         for (var i=0;i<$scope.storesFull.length;i++){
-            if ($scope.storeFull[i].)
+            if ($scope.storeFull[i].){
+
+            }
         }
     }
 
