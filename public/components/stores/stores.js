@@ -107,6 +107,10 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
 
     $scope.filterCity = function (cityFilter) {
         var temp = [];
+        if (cityFilter === "None"){
+            $scope.stores = $scope.storesFull;
+            return;
+        }
         for (var i=0;i<$scope.storesFull.length;i++){
             if ($scope.storesFull[i].city === cityFilter) {
                 temp.push($scope.storesFull[i]);
