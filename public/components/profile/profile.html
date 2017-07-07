@@ -1,37 +1,33 @@
-<div class="row" ng-init="getSessions()">
-    <div class="col-md-8 col-md-offset-2 well dropShadow">
-        <div class="row well panel panel-default ">
-            <h1 class="panel-heading bgPaper dropShadow"><center class="">PROFILE</center></h1>
-            <div class="panel-body">
-                <h1>User: {{ user.username }} </h1>
-                <h2>Email: {{ user.email }}</h2>
-                <h3>Member since: {{ user.dateJoined | date }}</h3>
-                <h3>My Store: {{ user.myStore.name }}</h3>
-                <h3><center ng-if="user.favoriteGames[0]">Favorite Games</center></h3>
-                <div ng-repeat="game in user.favoriteGames" class="well">
-                    <h3>Game: {{ game.name }}</h3>
-                </div>
-            </div>
-            <div class="panel-footer well">
-                <center>
-                    <h3 ng-if="user._sessionsJoined[0]"> Sessions </h3></center>
-                <div ng-repeat="session in user._sessionsJoined" class="col-md-offset-1 col-md-10 well dropShadow biggerFont">
-                    <div>
-                        <span>Title: {{ session.title }}</span>
-                        <button ng-show="{{ session.isOwner }}" class="pull-right btn btn-primary sideBySide" ng-click="exitSession(session._id)">Leave Session</button>
-                        <button ng-hide="{{ session.isOwner }}" class="pull-right btn btn-success sideBySide" ng-click="deleteMySession(session._id)">Delete Session</button>
+<div class="row bgBlack" ng-init="getSessions()">
+    <div class="col-md-4 well bgBlack">
+        <div class="row well panel panel-default">
+            <h1 class="panel-heading"><center class="">PROFILE</center></h1>
+            <div class="panel-body bgWhite">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2 font140"><a href="#/profile" style="color:black;"><i class="fa fa-user-secret"></i></a></div>
+                        <div class="col-md-10 font140">{{user.username}}</div>
+
+                        <div class="col-md-2 font140"><i class="fa fa-envelope"></i></div>
+                        <div class="col-md-10 font140">{{user.email}}</div>
+
+                        <div class="col-md-2 font140"><i class="fa fa-calendar"></i></div>
+                        <div class="col-md-10 font140">{{user.dateJoined | date }}</div>
+
+                        <div class="col-md-2 font140" ng-click="getStores(myState)"><i class="fa fa-heart" style="color:red;"></i></div>
+                        <div class="col-md-8 font140">{{ user.myStore.name}} </div>
+
+                        <h3><center ng-if="user.favoriteGames[0]">Favorite Games</center></h3>
                     </div>
 
                 </div>
-
-
-
+                <div ng-repeat="game in user.favoriteGames" class="panel-footer">
+                    <h3>Game: {{ game.name }}</h3>
+                </div>
             </div>
         </div>
-
-        <!--        //change password-->
-        <div class="row">
-            <div class="col-md-12 well">
+        <div class="row bgBlack">
+            <div class="well">
                 <h3><center>Change Password</center></h3>
                 <form>
                     <div class="form-group">
@@ -42,11 +38,57 @@
                         <label for="newPasswordRepeat">Repeat New Password</label>
                         <input type="password" id="newPasswordRepeat" class="form-control" ng-model="passwords.newPasswordRepeat">
                     </div>
-                    <button class="btn btn-primary" ng-click="changePassword(passwords)">Change Password</button>
+                    <center><button class="btn btn-primary" ng-click="changePassword(passwords)">Change Password</button>
+                    </center>
                     <br>
                     <br>
                 </form>
             </div>
         </div>
     </div>
+    <div class="col-md-8">
+        <div class="well">
+            <div ng-if="user._sessionsJoined[0]">
+                <center class='row'>
+                    <div class="font140">My Sessions </div>
+                    <br>
+                    <br>
+                </center>
+                <div class="row">
+                    <div ng-repeat="session in user._sessionsJoined" style="color:black;">
+                        <div class="col-md-4 panel panel-default">
+                            <div class="panel-heading bgBlue">
+                                <span class="">Title: {{ session.title }}</span>
+                                <span ng-show="{{ session.isOwner }}" class="pull-right btn btn-primary sideBySide" ng-click="exitSession(session._id)">Leave Session</span>
+                                <button ng-hide="{{ session.isOwner }}" class="pull-right sideBySide" style="color:red;" ng-click="deleteMySession(session._id)"><i class="fa fa-remove"></i></button>
+                            </div>
+                            <div class=" panel-body storeFont2">
+                                <div><a href="#" data-toggle="tooltip" data-placement="top" title="Game being played."><i class="fa fa-optin-monster"></i></a><span>{{ session.title }}</span></div>
+                                <div><a href="#" data-toggle="tooltip" data-placement="top" title="Date Created"><i class="fa fa-calendar-o blue"></i></a> <span>{{ session.createdAt | date }}</span><span ng-if="!session.createdAt">None</span></div>
+                                <div><a href="#" data-toggle="tooltip" data-placement="top" title="Session Date"><i class="fa fa-calendar-check-o blue"></i></a> <span>{{ session.dateOfSession | date}}</span><span ng-if="!session.dateOfSession">None</span></div>
+                                <div><a href="#" data-toggle="tooltip" data-placement="top" title="Start Time"><i class="fa fa-spinner"></i> </a><span> {{session.timeStart}}</span><span ng-if="!session.timeStart">None</span></div>
+                                <div><a href="#" data-toggle="tooltip" data-placement="top" title="Game Length"><i class="fa fa-hourglass"></i></a> <span>{{ session.estimatedGameLength}}</span><span ng-if="!session.estimatedGameLength">None</span></div>
+                                <div><a href="#" data-toggle="tooltip" data-placement="top" title="Min & Max Players"><i class="fa fa-user-plus"></i></a><span> Min/Max: </span> {{ session.minPlayers}} - {{session.maxPlayers}}</div>
+                                <div><i class="fa fa-comment "></i> <span>{{ session.description }}</span></div>
+                            </div>
+                            <div class="row panel-footer bgBlue">
+                                <center class="font140">Players</center>
+                                <div class="row" ng-repeat="player in session._players">
+                                    <div ng-if="player.username" class="sideBySide font140">{{player.username}}</div>
+                                    <div class="col-md-2" ng-if='player.username == name'>
+                                        <a href="#" ng-if="player.username" data-toggle="tooltip" data-placement="top" title="Exit Session"><i ng-click="exitSession(session._id)" class="fa fa-times" style="color:red;"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
+
+
+<!--        //change password-->

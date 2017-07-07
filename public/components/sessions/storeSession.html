@@ -31,7 +31,7 @@
     <section class="col-md-9">
 
         <div id="" class="panel panel-default col-sm-6 " ng-repeat="session in sessions" ng-model="choose">
-            <div class="panel-heading bgPaper">
+            <div class="panel-heading bgBlue">
                 <h4 class="row font140">
                     <div class="col-sm-7 biggerFont">{{ session.title }}</div>
                     <div class="col-sm-3 biggerFont sideBySide"><a href="#" data-toggle="tooltip" data-placement="top" title="Join Session"><i ng-click="joinSession(session._id)" class="fa fa-plus-circle blue"></i></a><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Session"><i class="sideBySide fa fa-remove font140" style="color:red;" ng-click="deleteMySession(session._id)"></i></a></div>

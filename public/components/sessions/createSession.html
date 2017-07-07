@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <br>
                     <label for="sessionName">Which game are we playing?</label>
-                    <select ng-model="session._game" ng-options="game as game.name for game in games">
+                    <select ng-model="session._game" ng-init="games[0]" ng-options="game as game.name for game in games">
                     </select>
                     <br>
                 </div>
@@ -68,7 +68,7 @@
                         </div>
                 </div>
             </section>
-            <center ng-show="created"><a href="/profile" class="btn btn-success">Profile</a></center>
+            <center ng-show="created"><button class="btn btn-success" ng-click="getProfile()">Profile</button></center>
 
         </div>
     </div>

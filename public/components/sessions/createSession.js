@@ -27,7 +27,7 @@ app.service("CreateSessionService", ["$http", function ($http) {
 
 }]);
 
-app.controller("CreateSessionController", ["$scope", "$localStorage", "CreateSessionService", "UserService", "GamesService", function ($scope, $localStorage, CreateSessionService, UserService, GamesService) {
+app.controller("CreateSessionController", ["$scope", "$localStorage", "$location", "CreateSessionService", "UserService", "GamesService", function ($scope, $localStorage, $location, CreateSessionService, UserService, GamesService) {
 
     $scope.session = {};
     $scope.sessions = [];
@@ -36,9 +36,11 @@ app.controller("CreateSessionController", ["$scope", "$localStorage", "CreateSes
     $scope.created = false;
 
 
+
     $scope.getGames = function getGames() {
         GamesService.getGames().then(function (games) {
             $scope.games = games;
+            $scope.session._game = games[0];
         });
     };
 
@@ -50,6 +52,11 @@ app.controller("CreateSessionController", ["$scope", "$localStorage", "CreateSes
             toastr.success(createdSession.message.message)
         })
     }
+
+    $scope.getProfile = function () {
+        $location.path('/profile');
+    }
+
     function getSessions() {
         CreateSessionService.getSessions().then(function (sessions) {
             $scope.sessions = sessions;

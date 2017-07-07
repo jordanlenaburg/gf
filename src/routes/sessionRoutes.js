@@ -36,8 +36,6 @@ sessionRouter.route("/deleteMySession/:sessionId")
         Session.findOne({
             _id: req.params.sessionId
         }, function (err, session) {
-            console.log('----deleteMySession----session.findone---')
-            console.log(session)
             if (err) {
                 res.status(500).send(err)
             } else {
@@ -179,7 +177,11 @@ sessionRouter.route("/sessions")
             }).
             //        populate('_sessionsJoined').
         populate({
-            path: '_sessionsJoined'
+            path: '_sessionsJoined',
+            populate: {
+                path: '_players',
+                model: 'User'
+            }
         }).
         populate('_game').
         populate('myStore').
