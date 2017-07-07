@@ -101,9 +101,12 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
     }
 
     $scope.filterByGame = function (gameFilter) {
-
+        console.log(gameFilter);
         var temp = [];
-        if (gameFilter) {
+        if (gameFilter.name === "None") {
+            $scope.sessions = $scope.sessionsFull;
+            return;
+        } else if (gameFilter) {
             for (var i = 0; i < $scope.sessionsFull.length; i++) {
                 if ($scope.sessionsFull[i]._game.name){
                     if ($scope.sessionsFull[i]._game.name === $scope.gameFilter.name) {
@@ -112,13 +115,11 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
                 }
 
             }
-        } else if (gameFilter === "None") {
+            $scope.sessions = temp;
 
-        } else {
-            temp = $scope.sessionsFull;
-        }
+        } else return;
 
-        $scope.sessions = temp;
+
     }
 
     $scope.deleteMySession = function (sessionId) {
