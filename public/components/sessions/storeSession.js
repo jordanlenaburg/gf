@@ -28,6 +28,7 @@ app.service("StoreSessionService", ["$http", "$localStorage", function ($http, $
     }
 
     this.deleteMySession = function (sessionId) {
+        console.log('service')
         return $http.delete("/api/sessionMaster/deleteMySession/" + sessionId).then(function (response) {
             return response.data
         })
@@ -79,6 +80,7 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
         StoreSessionService.getGames().then(function (games) {
             console.log(games[0].name);
             $scope.games = games;
+            $scope.games.unshift({name: "None"});
         });
     }
     $scope.getGames();
@@ -103,10 +105,15 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
         var temp = [];
         if (gameFilter) {
             for (var i = 0; i < $scope.sessionsFull.length; i++) {
-                if ($scope.sessionsFull[i]._game.name === $scope.gameFilter.name) {
-                    temp.push($scope.sessionsFull[i]);
+                if ($scope.sessionsFull[i]._game.name){
+                    if ($scope.sessionsFull[i]._game.name === $scope.gameFilter.name) {
+                        temp.push($scope.sessionsFull[i]);
+                    }
                 }
+
             }
+        } else if (gameFilter === "None") {
+
         } else {
             temp = $scope.sessionsFull;
         }
@@ -117,6 +124,7 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
     $scope.deleteMySession = function (sessionId) {
         console.log('sessionId: ' + sessionId);
         StoreSessionService.deleteMySession(sessionId).then(function (response) {
+            console.log('done delete')
             toastr.success(response.message)
             $scope.stores = [];
         }, function (response) {
