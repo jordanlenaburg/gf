@@ -46,6 +46,11 @@ app.service("StoreSessionService", ["$http", "$localStorage", function ($http, $
     }
 
 
+    this.getGames = function () {
+        return $http.get("/games").then(function (response) {
+            return response.data;
+        });
+    };
 }]);
 
 app.controller("StoreSessionController", ["$scope", "$localStorage", "$location", "StoreSessionService", "UserService", function ($scope, $localStorage, $location, StoreSessionService, UserService) {
@@ -61,19 +66,29 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
     $scope.name = $localStorage.name;
 
 
+
     $scope.getSessions = function (storeId) {
         StoreSessionService.getSessions(storeId).then(function (storeSessions) {
             $scope.sessions = storeSessions;
             $scope.sessionsFull = storeSessions;
-            console.log(storeSessions)
         })
     }
     $scope.getSessions($scope.storeId);
 
+    $scope.getGames = function () {
+        StoreSessionService.getGames().then(function (games) {
+            console.log(games[0].name);
+            $scope.games = games;
+        });
+    }
+    $scope.getGames();
+
     $scope.filterByDate = function (dateFilter) {
+        // not working due to format of date save...look at moment.js?
+        console.log(dateFilter)
         var temp = [];
         if (dateFilter) {
-            for (var i=0; i < $scope.sessionsFull.length; i++) {
+            for (var i = 0; i < $scope.sessionsFull.length; i++) {
                 if ($scope.sessionsFull[i].dateOfSession === dateFilter) {
                     temp.push($scope.sessionsFull[i]);
                 }
@@ -83,17 +98,20 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
 
     }
 
-    $scope.filterByCity = function (cityFilter) {
+    $scope.filterByGame = function (gameFilter) {
 
         var temp = [];
-        for (var i = 0; i < $scope.storesFull.length; i++) {
-            if ($scope.storesFull[i].city === $scope.cityFilter) {
-                temp.push($scope.storesFull[i]);
-            } else if ($scope.cityFilter === "None") {
-                temp.push($scope.storesFull[i])
+        if (gameFilter) {
+            for (var i = 0; i < $scope.sessionsFull.length; i++) {
+                if ($scope.sessionsFull[i]._game.name === $scope.gameFilter.name) {
+                    temp.push($scope.sessionsFull[i]);
+                }
             }
+        } else {
+            temp = $scope.sessionsFull;
         }
-        $scope.stores = temp;
+
+        $scope.sessions = temp;
     }
 
     $scope.deleteMySession = function (sessionId) {

@@ -12,10 +12,16 @@
 
                 </div>
                 <div class="row">
+                   <center>Filters</center>
                     <div class="col-md-10 font140">
                         <i class="fa fa-calendar"></i><input style="width: 200px;" type="date" id="dateFilter" class="form-control sideBySide" ng-model="dateFilter">
                     </div>
-                    <div class="col-md-2"><i class="fa fa-arrow-left font140" ng-click="filterByDate(dateFilter)"></i></div>
+                  <button class="btn btn-primary"><i class="fa fa-arrow-left font140" ng-click="filterByDate(dateFilter)"></i></button>
+                    <div class="col-md-12 font140">
+                        <i class="fa fa-share"></i><select class="sideBySide" ng-model="gameFilter" ng-init="games[0].name" ng-options="game.name for game in games" ng-change="filterByGame(gameFilter)">
+                        </select>
+                    </div>
+
                 </div>
             </div>
             <br>
