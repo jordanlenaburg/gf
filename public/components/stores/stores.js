@@ -128,11 +128,8 @@ app.controller("StoresController", ["$scope", "$localStorage", "$location", "Sto
         }
     }
 
-    $scope.getStoreSessions = function (storeId, storeName) {
-        $localStorage.storeInfo = {
-            storeId: storeId,
-            storeName: storeName
-        };
+    $scope.getStoreSessions = function (store) {
+        $localStorage.storeInfo = store;
         $location.path('/storeSession')
     }
 

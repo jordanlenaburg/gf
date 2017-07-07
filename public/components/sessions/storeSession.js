@@ -62,10 +62,10 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
     $scope.size = 1;
     $scope.myState = $localStorage.state;
     $scope.myStore = $localStorage.myStore || 'None';
-    $scope.storeId = $localStorage.storeInfo.storeId;
-    $scope.storeName = $localStorage.storeInfo.storeName;
+    $scope.storeId = $localStorage.storeInfo._id;
+    $scope.storeName = $localStorage.storeInfo.name;
+    $scope.store = $localStorage.storeInfo;
     $scope.name = $localStorage.name;
-
 
 
     $scope.getSessions = function (storeId) {
