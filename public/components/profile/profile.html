@@ -1,5 +1,5 @@
 <div class="row bgBlack" ng-init="getSessions()">
-    <div class="col-md-4 well bgBlack">
+    <div class="col-md-4 bgBlack">
         <div class="row well panel panel-default">
             <h1 class="panel-heading"><center class="">PROFILE</center></h1>
             <div class="panel-body bgWhite">
@@ -56,7 +56,7 @@
                 </center>
                 <div class="row">
                     <div ng-repeat="session in user._sessionsJoined" style="color:black;">
-                        <div class="col-md-4 panel panel-default">
+                        <div class="col-md-6 panel panel-default">
                             <div class="panel-heading bgBlue">
                                 <span class="">Title: {{ session.title }}</span>
                                 <span ng-show="{{ session.isOwner }}" class="pull-right btn btn-primary sideBySide" ng-click="exitSession(session._id)">Leave Session</span>

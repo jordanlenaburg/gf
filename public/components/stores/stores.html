@@ -22,12 +22,12 @@
             <div class="col-md-12 well">
                 <br>
                 <br>
-                <br>
-                State:<select class="pullRight" ng-attr-size="{{size}}" ng-model="newState" ng-init="states[0]" ng-options="state for state in states" ng-change="changeState(newState)">
+                <br> State:
+                <select class="pullRight" ng-attr-size="{{size}}" ng-model="newState" ng-init="states[0]" ng-options="state for state in states" ng-change="changeState(newState)">
                 </select>
                 <br>
-                <br>
-                City:<select ng-attr-size="{{size}}" ng-model="cityFilter" ng-init="cities[0]" ng-options="city for city in cities" ng-change="filterCity(cityFilter)">
+                <br> City:
+                <select ng-attr-size="{{size}}" ng-model="cityFilter" ng-init="cities[0]" ng-options="city for city in cities" ng-change="filterCity(cityFilter)">
                 </select>
                 <br>
                 <br>
@@ -59,7 +59,9 @@
                     </a>
                     <i ng-if="myStore === store.name" class="fa fa-heart" style="color:red;"></i>
                 </h4>
-                <button type="button" class="bigFont" style="float: right;" ng-click="sessionCreator(store._id)"><a  data-toggle="tooltip" data-placement="top" title="Create a Game Session!"><h5><i class="fa fa-plus-square"></i></h5></a></button>
+                <a href="#0" title="Create a New Session!" data-toggle="tooltip" data-placement="top" tooltip>
+                    <button type="button" class="bigFont" style="float: right;" ng-click="sessionCreator(store._id)"><a href="#" data-toggle="tooltip" data-placement="top" title="Create a Game Session!"><h5><i class="fa fa-plus-square"></i></h5></a></button>
+                </a>
 
             </div>
             <div class="panel-body bgWhite">

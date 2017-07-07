@@ -12,8 +12,10 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-10 font140"><input style="width: 200px;" type="date" id="dateFilter" class="form-control sideBySide" ng-model="dateFilter"></div>
-                    <div class="col-md-2"><i class="fa fa-arrow-left" ng-click="filterByDate(dateFilter)"></i></div>
+                    <div class="col-md-10 font140">
+                        <i class="fa fa-calendar"></i><input style="width: 200px;" type="date" id="dateFilter" class="form-control sideBySide" ng-model="dateFilter">
+                    </div>
+                    <div class="col-md-2"><i class="fa fa-arrow-left font140" ng-click="filterByDate(dateFilter)"></i></div>
                 </div>
             </div>
             <br>
@@ -23,7 +25,36 @@
         </div>
         <div class="well row">
             <div class="col-md-12">
-                <div class="col-md-10 font140">{{storeName}}</div>
+                <center><div class="col-md-10 font140">{{storeName}}</div></center>
+                <div class="row storeFont">
+                    <div></div>
+                    <div class="col-md-12 storeFont2">
+                        <i class="fa fa-phone blue"></i> <span>{{ store.phone }}</span>
+                        <div><i class="fa fa-globe blue"></i> <span>{{store.streetAddy| limitTo:10}} {{store.city| limitTo:10}}</span></div>
+                        <div><i class="fa fa-firefox" style="color:red;"></i> {{store.website | limitTo:20}}</div>
+                        <div><i ng-if="store.gamingTables" class="fa fa-dashcube"></i> <span ng-if="store.gamingTables">Gaming Tables:</span> <span>{{store.gamingTables}}</span></div>
+                        <div><i ng-if="store.description" class="fa fa-comment "></i> <span>{{ store.description | limitTo:20}}</span></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">Mon:</div> <span class="col-md-9" ng-hide="{{store.hours.mon.open == 64}}">{{store.hours.mon.open}} - {{store.hours.mon.close}}</span><span class="col-md-9" ng-show="{{store.hours.mon.open == 64}}">Closed</span>
+                            <br>
+                            <div class="col-md-3">Tue:</div><span class="col-md-9" ng-hide="{{store.hours.tue.open == 64}}">{{store.hours.tue.open}} - {{store.hours.tue.close}}</span><span class="col-md-9" ng-show="{{store.hours.tue.open == 64}}">Closed</span>
+                            <br>
+                            <div class="col-md-3">Wed:</div><span class="col-md-9" ng-hide="{{store.hours.wed.open == 64}}">{{store.hours.wed.open}} - {{store.hours.wed.close}}</span><span class="col-md-9" ng-show="{{store.hours.wed.open == 64}}">Closed</span>
+                            <br>
+                            <div class="col-md-3">Thur:</div><span class="col-md-9" ng-hide="{{store.hours.thur.open == 64}}">{{store.hours.thur.open}} - {{store.hours.thur.close}}</span><span class="col-md-9" ng-show="{{store.hours.mthur.open == 64}}">Closed</span>
+                            <br>
+                            <div class="col-md-3">Fri:</div><span class="col-md-9" ng-hide="{{store.hours.fri.open == 64}}">{{store.hours.fri.open}} - {{store.hours.fri.close}}</span><span class="col-md-9" ng-show="{{store.hours.fri.open == 64}}">Closed</span>
+                            <br>
+                            <div class="col-md-3">Sat:</div><span class="col-md-9" ng-hide="{{store.hours.sat.open == 64}}">{{store.hours.sat.open}} - {{store.hours.sat.close}}</span><span class="col-md-9" ng-show="{{store.hours.sat.open == 64}}">Closed</span>
+                            <br>
+                            <div class="col-md-3">Sun:</div><span class="col-md-9" ng-hide="{{store.hours.sun.open == 64}}">{{store.hours.sun.open}} - {{store.hours.sun.close}}</span><span class="col-md-9" ng-show="{{store.hours.sun.open == 64}}">Closed</span>
+                            <br>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>

@@ -55,6 +55,10 @@ body {
     color: #0099FF;
 }
 
+.marker {
+    font-family: 'Permanent Marker', cursive;
+}
+
 .botPad {
     padding-bottom: 10px;
 }

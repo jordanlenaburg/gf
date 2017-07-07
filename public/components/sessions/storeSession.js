@@ -64,12 +64,26 @@ app.controller("StoreSessionController", ["$scope", "$localStorage", "$location"
     $scope.getSessions = function (storeId) {
         StoreSessionService.getSessions(storeId).then(function (storeSessions) {
             $scope.sessions = storeSessions;
+            $scope.sessionsFull = storeSessions;
             console.log(storeSessions)
         })
     }
     $scope.getSessions($scope.storeId);
 
-    $scope.filterCity = function (cityFilter) {
+    $scope.filterByDate = function (dateFilter) {
+        var temp = [];
+        if (dateFilter) {
+            for (var i=0; i < $scope.sessionsFull.length; i++) {
+                if ($scope.sessionsFull[i].dateOfSession === dateFilter) {
+                    temp.push($scope.sessionsFull[i]);
+                }
+            }
+            $scope.sessions = temp;
+        }
+
+    }
+
+    $scope.filterByCity = function (cityFilter) {
 
         var temp = [];
         for (var i = 0; i < $scope.storesFull.length; i++) {
